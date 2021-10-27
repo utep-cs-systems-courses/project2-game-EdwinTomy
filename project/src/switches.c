@@ -2,10 +2,10 @@
 #include "led.h"
 #include "buzzer.h"
 
-ifButton1 = 0;
-ifButton2 = 0;
-ifButton3 = 0;
-ifButton4 = 0;
+int sw1Down = 0;
+int sw2Down = 0;
+int sw3Down = 0;
+int sw4Down = 0;
 
 int currSecond = 0
 int harryPotterNotes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
@@ -44,11 +44,13 @@ void switch_interrupt_handler()
   int prev3 = sw3Down;
   int prev4 = sw4Down;
   
-  sw1Down = (p2val & SW1) ? 0 : 1;
-  sw2Down = (p2val & SW2) ? 0 : 1;
-  sw3Down = (p2val & SW3) ? 0 : 1;
-  sw4Down = (p2val & SW4) ? 0 : 1;
-
+  if((p2val & SWITCHES) == 14){
+    sw1Down ^= 1;
+    buzzer_init();
+  //toggle sw2 on or off
+  } else {
+    buzzer_set_period(0);
+  }
 }
 
 void __interrupt_vec(PORT2_VECTOR) PORT_2()
