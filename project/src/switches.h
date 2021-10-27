@@ -12,3 +12,4 @@ void switch_init();
 
 void switch_interrupt_handler();
 
+#endif
