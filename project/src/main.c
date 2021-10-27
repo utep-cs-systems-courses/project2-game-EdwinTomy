@@ -1,5 +1,5 @@
 #include <msp430.h>
-#include "../libTimer/libTimer.h"
+#include "../timerLib/libTimer.h"
 #include "led.h"
 #include "buzzer.h"
 #include "switches.h"
