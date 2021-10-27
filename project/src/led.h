@@ -5,4 +5,10 @@
 #define LED_GREEN BIT6
 #define LEDS (BIT0 | BIT6)
 
+void led_init();
+void led_update();
+void turnGreen(int state);
+void turnRed(int state);
+void turnLEDS(int state);
+
 #endif
