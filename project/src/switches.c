@@ -62,24 +62,6 @@ void __interrupt_vec(PORT2_VECTOR) PORT_2()
   }
 }
 
-void
-__interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
-{
-  
-  currSecond++;
-  
-  if(sw1Down == 1){ 
-    playHarryPotter();
-   
-  } else if(sw2Down == 1){ 
-    playShinjeki();
-    
-  } else {
-    buzzer_set_period(0);
-  }
-  
-} 
-
 void playHarryPotter()
 {
   if(currSecond >= harryPotterTimes[i]){
@@ -96,6 +78,24 @@ void playHarryPotter()
 //{
   //
 //}
+
+void
+__interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
+{
+  
+  currSecond++;
+  
+  if(sw1Down == 1){ 
+    playHarryPotter();
+   
+  } //else if(sw2Down == 1){ 
+    //playShinjeki();} 
+    else {
+    buzzer_set_period(0);
+  }
+  
+} 
+
 
 
 
