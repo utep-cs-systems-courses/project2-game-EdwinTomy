@@ -11,11 +11,8 @@ AS              = msp430-elf-as
 all: led.elf 
 
 #additional rules for files
-led.elf: ${COMMON_OBJECTS} 
+led.elf: ${COMMON_OBJECTS} main.o switches.o stateMachines.o buzzer.o led.o wdInterruptHandler.o p2_interrupt_handler.o 
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../timerLib/libTimer.a
-	
-buzzer.elf: ${COMMON_OBJECTS} buzzer.o buzzerMain.o ../timerLib/libTimer.a
-	${CC} ${CFLAGS} -o $@ $^
 
 
 load: led.elf buzzer.elf
