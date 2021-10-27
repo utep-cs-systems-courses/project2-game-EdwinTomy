@@ -12,7 +12,7 @@ int currSecond = 0;
 int harryPotterNotes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
 int harryPotterTimes[14] = {2, 3, 1, 2, 4, 2, 5, 5, 3, 1, 2, 4, 2, 5};
 int harryPotterLen = 14;
-int i = 0
+int i = 0;
 
 static char switch_update_interrupt_sense()
 {
@@ -32,7 +32,7 @@ void switch_init()
   P2IE |= SWITCHES;   // Enable interrupts from switches
   P2OUT |= SWITCHES;   // Pull-ups for switches
   P2DIR &= ~SWITCHES;   // Set switches' bits for input
-  switch_update_interrupt_sense();
+  switch_interrupt_handler();
   led_update();
 }
 
@@ -66,7 +66,7 @@ void
 __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
 {
   
-  secondCount++;
+  currSecond++;
   
   if(sw1Down == 1){ 
     playHarryPotter();
