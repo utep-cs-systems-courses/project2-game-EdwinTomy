@@ -8,7 +8,7 @@ LDFLAGS		= -L/opt/ti/msp430_gcc/include
 CC              = msp430-elf-gcc
 AS              = msp430-elf-as
 
-all: led.elf buzzer.elf 
+all: led.elf 
 
 #additional rules for files
 led.elf: ${COMMON_OBJECTS} 
@@ -24,6 +24,11 @@ load: led.elf buzzer.elf
 clean:
 	rm -f *.o *.elf
 
-main.o: led.h buzzer.h
+led.o: led.c led.h
 
-wdInterruptHandler.o:  led.h
+buzzer.o: buzzer.h
+
+switches.o: switches.h led.h
+
+main.o: led.h switches.h led.h
+
