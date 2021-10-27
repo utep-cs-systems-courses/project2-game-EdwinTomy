@@ -7,6 +7,12 @@ ifButton2 = 0;
 ifButton3 = 0;
 ifButton4 = 0;
 
+int currSecond = 0
+int harryPotterNotes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
+int harryPotterTimes[14] = {2, 3, 1, 2, 4, 2, 5, 5, 3, 1, 2, 4, 2, 5};
+int harryPotterLen = 14;
+int i = 0
+
 static char switch_update_interrupt_sense()
 {
   char p2val = P2IN;
@@ -43,10 +49,7 @@ void switch_interrupt_handler()
   sw3Down = (p2val & SW3) ? 0 : 1;
   sw4Down = (p2val & SW4) ? 0 : 1;
 
-  
- 
 }
-
 
 void __interrupt_vec(PORT2_VECTOR) PORT_2()
 {
@@ -59,19 +62,37 @@ void __interrupt_vec(PORT2_VECTOR) PORT_2()
 void
 __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
 {
-  static int blink_count = 0;
   
-  switch (blink_count) { 
+  secondCount++;
   
-  case 6: 
-    blink_count = 0;
-    P2OUT |= LED_RED;
-    break;
+  if(sw1Down == 1){ 
+    playHarryPotter();
+   
+  } else if(sw2Down == 1){ 
+    playShinjeki();
     
-  default:
-    blink_count ++;
-    if (!buttonDown) P2OUT &= ~LED_RED; /* don't blink off if button is down */
+  } else {
+    buzzer_set_period(0);
   }
   
-  
 } 
+
+void playHarryPotter()
+{
+  if(currSecond >= harryPotterTimes[i]){
+    currSecond = 0;
+    if(i >= 26){
+      i = 0;
+    }
+    buzzer_set_period(harryPotterNotes[i]);
+    i++;
+  }
+}
+
+void playShinjeki()
+{
+  //
+}
+
+
+
