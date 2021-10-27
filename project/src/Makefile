@@ -13,13 +13,18 @@ all: led.elf buzzer.elf
 #additional rules for files
 led.elf: ${COMMON_OBJECTS} 
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
+	
+buzzer.elf: ${COMMON_OBJECTS}  ../lib/libTimer.a
+	${CC} ${CFLAGS} -o $@ $^
 
-load: led.elf
+load: led.elf buzzer.elf
 	msp430loader.sh led.elf
+	
+
 
 clean: rm -f *.o *.elf
 
-main.o: led.h
+main.o: led.h buzzer.h
 
 wdInterruptHandler.o:  led.h
 
