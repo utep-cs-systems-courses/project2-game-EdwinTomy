@@ -1,6 +1,6 @@
 #include <msp430.h>
-#include "switches.h"
 #include "led.h"
+#include "buzzer.h"
 
 ifButton1 = 0;
 ifButton2 = 0;
@@ -55,3 +55,23 @@ void __interrupt_vec(PORT2_VECTOR) PORT_2()
     switch_interrupt_handler();   // Single handler for all switches
   }
 }
+
+void
+__interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
+{
+  static int blink_count = 0;
+  
+  switch (blink_count) { 
+  
+  case 6: 
+    blink_count = 0;
+    P2OUT |= LED_RED;
+    break;
+    
+  default:
+    blink_count ++;
+    if (!buttonDown) P2OUT &= ~LED_RED; /* don't blink off if button is down */
+  }
+  
+  
+} 
