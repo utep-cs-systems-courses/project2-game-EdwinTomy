@@ -8,23 +8,23 @@ LDFLAGS		= -L/opt/ti/msp430_gcc/include
 CC              = msp430-elf-gcc
 AS              = msp430-elf-as
 
-all: led.elf buzzer.elf 
+all: buzzer.elf 
 
 #additional rules for files
-led.elf: ${COMMON_OBJECTS} 
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
+#led.elf: ${COMMON_OBJECTS} 
+#	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
 	
 buzzer.elf: ${COMMON_OBJECTS}  ../lib/libTimer.a
 	${CC} ${CFLAGS} -o $@ $^
 
-load: led.elf buzzer.elf
-	msp430loader.sh led.elf
+load: buzzer.elf
+	msp430loader.sh  $^
 	
 
 
 clean: rm -f *.o *.elf
 
-main.o: led.h buzzer.h
+buzzer.c: buzzer.h
 
-wdInterruptHandler.o:  led.h
+buzzerMain.c: buzzer.h
 
