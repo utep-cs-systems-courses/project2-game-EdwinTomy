@@ -8,7 +8,7 @@ int sw2Down = 0;
 int sw3Down = 0;
 int sw4Down = 0;
 
-int currSecond = 0
+int currSecond = 0;
 int harryPotterNotes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
 int harryPotterTimes[14] = {2, 3, 1, 2, 4, 2, 5, 5, 3, 1, 2, 4, 2, 5};
 int harryPotterLen = 14;
@@ -92,10 +92,10 @@ void playHarryPotter()
   }
 }
 
-void playShinjeki()
-{
+//void playShinjeki()
+//{
   //
-}
+//}
 
 
 
