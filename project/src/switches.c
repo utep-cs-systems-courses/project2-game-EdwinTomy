@@ -33,34 +33,25 @@ void switch_interrupt_handler()
 {
   char p2val = switch_update_interrupt_sense();
 
-  int prev1 = ifButton1;
-  int prev2 = ifButton2;
-  int prev3 = ifButton3;
-  int prev4 = ifButton4;
-
-  // Checks if button has been pressed
-  ifButton1 = (p2val & SW1) ? 0 : 1;
-  ifButton2 = (p2val & SW2) ? 0 : 1;
-  ifButton3 = (p2val & SW3) ? 0 : 1;
-  ifButton4 = (p2val & SW4) ? 0 : 1;
-
-  // Press button once to turn off, press again to turn off
-  if (prev1 != ifButton1 && ifButton1){
-    oddPress1 ^= 1;
-    // One button pressed, all other should be off
-    oddPress2 = 0, oddPress3 = 0, oddPress4 = 0;
-  }
-  else if (prev2 != sw2Down && sw2Down){
-    oddPress2 ^=1;
-    oddPress1 = 0, oddPress3 = 0, oddPress4 = 0;
-  }
-  else if (prev3 != sw3Down && sw3Down){
-    oddPress3 ^=1;
-    oddPress1 = 0, oddPress2 = 0, oddPress4 = 0;
-  }
-  else if (prev4 != sw4Down && sw4Down){
-    oddPress4 ^=1;
-    oddPress1 = 0, oddPress2 = 0, oddPress3 = 0;
-  }
+  int prev1 = sw1Down;
+  int prev2 = sw2Down;
+  int prev3 = sw3Down;
+  int prev4 = sw4Down;
   
+  sw1Down = (p2val & SW1) ? 0 : 1;
+  sw2Down = (p2val & SW2) ? 0 : 1;
+  sw3Down = (p2val & SW3) ? 0 : 1;
+  sw4Down = (p2val & SW4) ? 0 : 1;
+
+  
+ 
+}
+
+
+void __interrupt_vec(PORT2_VECTOR) PORT_2()
+{
+  if (P2IFG & SWITCHES) {   // Did a button cause this interrupt?
+    P2IFG &= ~SWITCHES;   // Clear pending sw interrupts
+    switch_interrupt_handler();   // Single handler for all switches
+  }
 }
