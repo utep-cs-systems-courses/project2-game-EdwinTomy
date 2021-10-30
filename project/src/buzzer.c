@@ -38,49 +38,49 @@ void play_harry_potter(int sec_cnt)
   if(sec_cnt <= 0){
     buzzer_set_period(0);
     
-  } else if(2*sec_cnt <= 500){
+  } else if(sec_cnt <= 500/2){
     buzzer_set_period(617);
     
-  } else if(2*sec_cnt <= 1250){
+  } else if(sec_cnt <= 1250/2){
     buzzer_set_period(824);
     
-  } else if(2*sec_cnt <= 1500){
+  } else if(sec_cnt <= 1500/2){
     buzzer_set_period(980);
     
-  } else if(2*sec_cnt <= 2000){
+  } else if(sec_cnt <= 2000/2){
     buzzer_set_period(873);
     
-  } else if(2*sec_cnt <= 3000){
+  } else if(sec_cnt <= 3000/2){
     buzzer_set_period(824);
     
-  } else if(2*sec_cnt <= 3500){
+  } else if(sec_cnt <= 3500/2){
     buzzer_set_period(1234);
     
-  } else if(2*sec_cnt <= 4750){
+  } else if(sec_cnt <= 4750/2){
     buzzer_set_period(1100);
     
-  } else if(2*sec_cnt <= 6000){
+  } else if(sec_cnt <= 6000/2){
     buzzer_set_period(925);
     
-  } else if(2*sec_cnt <= 4750){
+  } else if(sec_cnt <= 4750/2){
     buzzer_set_period(1100);
     
-  } else if(2*sec_cnt <= 6750){
+  } else if(sec_cnt <= 6750/2){
     buzzer_set_period(824);
     
-  } else if(2*sec_cnt <= 7000){
+  } else if(sec_cnt <= 7000/2){
     buzzer_set_period(980);
     
-  } else if(2*sec_cnt <= 7500){
+  } else if(sec_cnt <= 7500/2){
     buzzer_set_period(873);
     
-  } else if(2*sec_cnt <= 8500){
+  } else if(sec_cnt <= 8500/2){
     buzzer_set_period(777);
     
-  } else if(2*sec_cnt <= 9000){
+  } else if(sec_cnt <= 9000/2){
     buzzer_set_period(873);
     
-  } else if(2*sec_cnt <= 10250){
+  } else if(sec_cnt <= 10250/2){
     buzzer_set_period(617);
  
   } else {
