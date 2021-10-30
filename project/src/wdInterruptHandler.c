@@ -13,7 +13,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
     state_advance(blink_count);
     if (++blink_count >= 1000) blink_count = 0;
   } else if(sw2_down == 1){    // Second switch activates buzzer
-    play_harryPotter(blink_count);
+    play_harry_potter(blink_count);
     if(++blink_count >= 4000) blink_count = 0;
   } else if(sw3_down == 1){   // Third switch that activate assy code for leds
     alternate_leds(blink_count);
