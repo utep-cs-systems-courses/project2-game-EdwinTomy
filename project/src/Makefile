@@ -12,7 +12,7 @@ all: led.elf
 
 #additional rules for files
 led.elf: ${COMMON_OBJECTS} main.o switches.o buzzer.o led.o 
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../timerLib/libTimer.a
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
 
 
 load: led.elf buzzer.elf
