@@ -10,6 +10,6 @@
 void switch_init();
 void switch_interrupt_handler();
 
-extern char sw1_state_down, sw2_state_down, sw3_state_down, sw4_state_down;
+extern char sw1_down, sw2_down, sw3_down, sw4_down;
 
 #endif
