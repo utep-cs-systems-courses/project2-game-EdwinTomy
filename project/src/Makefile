@@ -11,7 +11,7 @@ AS              = msp430-elf-as
 all: buzzer.elf
 
 #additional rules for files
-lbuzzer.elf: ${COMMON_OBJECTS} buzzer.o main.o ../lib/libTimer.a
+buzzer.elf: ${COMMON_OBJECTS} buzzer.o main.o ../lib/libTimer.a
 	${CC} ${CFLAGS} -o $@ $^
 
 load: buzzer.elf
