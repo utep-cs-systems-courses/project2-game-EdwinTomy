@@ -15,7 +15,7 @@ led.elf: ${COMMON_OBJECTS} main.o switches.o buzzer.o led.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ ../lib/libTimer.a
 
 
-load: led.elf buzzer.elf
+load: led.elf
 	msp430loader.sh led.elf
 
 clean:
