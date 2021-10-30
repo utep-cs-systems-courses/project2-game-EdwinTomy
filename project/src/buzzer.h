@@ -4,6 +4,6 @@
 void buzzer_init();
 void buzzer_set_period(short cycles);
 void buzzer_off();
-void play_harryPotter(int seconds);
+void play_harry_potter(int seconds);
 
 #endif // included
