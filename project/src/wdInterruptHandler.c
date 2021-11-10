@@ -1,5 +1,4 @@
 #include <msp430.h>
-#include "stateMachines.h"
 #include "switches.h"
 #include "buzzer.h"
 #include "led.h"
@@ -8,7 +7,7 @@ int blink_count = 0;
 
 void
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
-  secondCount++;
+  blink_count++;
   if(sw1_down == 1){ //if sw1 pressed
     play_harry_potter();
   }else if(sw2_down == 1 ){ //if sw2 pressed
