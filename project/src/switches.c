@@ -35,10 +35,28 @@ switch_interrupt_handler()
 {
   char p2val = switch_update_interrupt_sense();
   
-  sw1_down = (p2val & SWS1) ? 0 : 1; /* 0 when SW1 is up */
-  sw2_down = (p2val & SWS2) ? 0 : 1; /* 0 when SW2 is up */
-  sw3_down = (p2val & SWS3) ? 0 : 1; /* 0 when SW3 is up */
-  sw4_down = (p2val & SWS4) ? 0 : 1; /* 0 when SW4 is up */
+  if((p2val & SWITCHES) == 14){ //toggle sw1 on or off
+    turnOff();
+    sw1Down ^= 1;
+  } else if((p2val & SWITCHES) == 13){ //toggle sw2 on or off
+    turnOff();
+    sw2Down ^= 1;
+  } else if((p2val & SWITCHES) == 11){
+    turnOff();
+    sw3Down ^= 1;
+  } else if((p2val & SWITCHES) == 7){
+    turnOff();
+    sw4Down ^= 1;
+  } else {
+    buzzer_set_period(0); //if no switches are active
+  }
+}
+
+void turnOff(){
+  sw1Down &= ~sw1Down;
+  sw2Down &= ~sw2Down;
+  sw3Down &= ~sw3Down;
+  sw4Down &= ~sw4Down;
 }
 
 /* Switch on P2 (S2) */
