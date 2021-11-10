@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "libTimer.h"
 #include "switches.h"
+#include "buzzer.h"
 #include "led.h"
 
 char sw1_down;
@@ -30,6 +31,13 @@ switch_init()/* setup switch */
   switch_update_interrupt_sense();
 }
 
+void turnOff(){
+  sw1_Down &= ~sw1_Down;
+  sw2_Down &= ~sw2_Down;
+  sw3_Down &= ~sw3_Down;
+  sw4_Down &= ~sw4_Down;
+}
+
 void
 switch_interrupt_handler()
 {
@@ -37,26 +45,19 @@ switch_interrupt_handler()
   
   if((p2val & SWITCHES) == 14){ //toggle sw1 on or off
     turnOff();
-    sw1Down ^= 1;
+    sw1_Down ^= 1;
   } else if((p2val & SWITCHES) == 13){ //toggle sw2 on or off
     turnOff();
-    sw2Down ^= 1;
+    sw2_Down ^= 1;
   } else if((p2val & SWITCHES) == 11){
     turnOff();
-    sw3Down ^= 1;
+    sw3_Down ^= 1;
   } else if((p2val & SWITCHES) == 7){
     turnOff();
-    sw4Down ^= 1;
+    sw4_Down ^= 1;
   } else {
     buzzer_set_period(0); //if no switches are active
   }
-}
-
-void turnOff(){
-  sw1Down &= ~sw1Down;
-  sw2Down &= ~sw2Down;
-  sw3Down &= ~sw3Down;
-  sw4Down &= ~sw4Down;
 }
 
 /* Switch on P2 (S2) */
