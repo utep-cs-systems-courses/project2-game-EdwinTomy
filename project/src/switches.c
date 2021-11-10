@@ -8,7 +8,6 @@ char sw1_down;
 char sw2_down;
 char sw3_down;
 char sw4_down;
-char change; 
 
 static char
 switch_update_interrupt_sense()
