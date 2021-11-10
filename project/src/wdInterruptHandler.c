@@ -3,24 +3,23 @@
 #include "switches.h"
 #include "buzzer.h"
 #include "led.h"
-#include "led-assy.h"
 
 int blink_count = 0;
 
 void
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
-  if(sw1_down == 1){     // First switch activates state machine
-    state_advance(blink_count);
-    if (++blink_count >= 1000) blink_count = 0;
-  } else if(sw2_down == 1){    // Second switch activates buzzer
-    play_harry_potter(blink_count);
-    if(++blink_count >= 4000) blink_count = 0;
-  } else if(sw3_down == 1){   // Third switch that activate assy code for leds
-    alternate_leds(blink_count);
-    if(++blink_count >= 750) blink_count = 0;
-  } else if(sw4_down == 1){   // Fourth switch resets LEDs, and deactivates buzzer
+  secondCount++;
+  if(sw1Down == 1){ //if sw1 pressed
+    play_harry_potter();
+  }else if(sw2Down == 1 ){ //if sw2 pressed
+    play_harry_potter();
+  }else if(sw3Down == 1){  
+    dimLights();
+  }else if(sw4Down ==1){
     buzzer_off();
     led_off();
-    blink_count = 0;
+    buzzer_set_period(0);
+  }else{
+    buzzer_set_period(0);
   }
 }
