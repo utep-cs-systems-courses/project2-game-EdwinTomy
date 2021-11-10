@@ -1,7 +1,6 @@
 #include <msp430.h>
 #include "libTimer.h"
 #include "buzzer.h"
-#include "switches.h"
 
 void buzzer_init()
 {
@@ -29,25 +28,6 @@ void buzzer_set_period(short cycles) /* buzzer clock = 2MHz.  (period of 1k resu
 void buzzer_off()
 {
   buzzer_set_period(0);
-}
-
-int second_count = 0;
-int i = 0;
-
-int harry_potter_notes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
-int harry_potter_times[14] = {250, 375, 125, 250, 500, 250, 625, 625, 375, 125, 250, 500, 250, 625};
-
-void play_harry_potter(){
-  if(second_count >= harry_potter_times[i]){
-    
-    second_count = 0;
-    if(i >= 14){
-      i = 0;
-    }
-    
-    buzzer_set_period(harry_potter_notes[i]);
-    i++;
-  }
 }
 
             
