@@ -19,7 +19,7 @@ load: main.elf
 clean: $^
 	rm -f *.o *.elf *.c~ *.h~ *.c#
 
-buzzer.o: buzzer.h
-led.o: led.h
-switches.o: switches.h led.h
+buzzer.o: buzzer.h switches.h
+led.o: led.h switches.h
+switches.o: switches.h led.h 
 wdInterruptHandler.o: switches.h buzzer.h led.h 
