@@ -32,10 +32,10 @@ switch_init()/* setup switch */
 }
 
 void turnOff(){
-  sw1_Down &= ~sw1_Down;
-  sw2_Down &= ~sw2_Down;
-  sw3_Down &= ~sw3_Down;
-  sw4_Down &= ~sw4_Down;
+  sw1_down &= ~sw1_down;
+  sw2_down &= ~sw2_down;
+  sw3_down &= ~sw3_down;
+  sw4_down &= ~sw4_down;
 }
 
 void
@@ -45,16 +45,16 @@ switch_interrupt_handler()
   
   if((p2val & SWITCHES) == 14){ //toggle sw1 on or off
     turnOff();
-    sw1_Down ^= 1;
+    sw1_down ^= 1;
   } else if((p2val & SWITCHES) == 13){ //toggle sw2 on or off
     turnOff();
-    sw2_Down ^= 1;
+    sw2_down ^= 1;
   } else if((p2val & SWITCHES) == 11){
     turnOff();
-    sw3_Down ^= 1;
+    sw3_down ^= 1;
   } else if((p2val & SWITCHES) == 7){
     turnOff();
-    sw4_Down ^= 1;
+    sw4_down ^= 1;
   } else {
     buzzer_set_period(0); //if no switches are active
   }
