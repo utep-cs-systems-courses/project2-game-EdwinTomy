@@ -20,13 +20,23 @@ int blink_count = 0;
 // LED dimming
 int dim_state = 1;
 int curr_state = 0;
+int main_state = 0;
 
-void dimLights(){
+void dim_lights(){
   blink_count++;
   
   if(blink_count >= 500){
     dim_state = (dim_state + 1) % 5;
     blink_count = 0;
+  }
+  
+  if(blink_count % 250 == 0){
+    main_state ^= 1; 
+  }
+  
+  if(main_state == 0){
+    P1OUT &= ~LED_GREEN;
+    return;
   }
   
   curr_state = (curr_state + 1) % 4;
@@ -120,7 +130,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
     play_harry_potter();
     
   } else if(sw3_down == 1){  
-    dimLights();
+    dim_lights();
     
   } else if(sw4_down == 1){
     buzzer_off();
@@ -128,6 +138,8 @@ __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
     buzzer_set_period(0);
     
   } else {
+    buzzer_off();
+    led_off();
     buzzer_set_period(0);
   }
 }
