@@ -30,64 +30,25 @@ void buzzer_off()
   buzzer_set_period(0);
 }
 
-// Function that utilizes the buzzer to play the happy birthday song.
-void play_harry_potter(int sec_cnt)
-{
-  sec_cnt++;
-  
-  if(sec_cnt <= 0){
-    buzzer_set_period(0);
+int second_count = 0;
+int i = 0;
+
+int harry_potter_notes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
+int harry_potter_times[14] = {250, 375, 125, 250, 500, 250, 625, 625, 375, 125, 250, 500, 250, 625};
+
+void playHarryPotter(){
+  if(second_count >= harry_potter_times[i]){
     
-  } else if(sec_cnt >= 10250/4 -  500/4){
-    buzzer_set_period(617);
+    second_count = 0;
+    if(i >= 14){
+      i = 0;
+    }
     
-  } else if(sec_cnt >= 10250/4 - 1250/4){
-    buzzer_set_period(824);
-    
-  } else if(sec_cnt >= 10250/4 - 1500/4){
-    buzzer_set_period(980);
-    
-  } else if(sec_cnt >= 10250/4 - 2000/4){
-    buzzer_set_period(873);
-    
-  } else if(sec_cnt >= 10250/4 - 3000/4){
-    buzzer_set_period(824);
-    
-  } else if(sec_cnt >= 10250/4 - 3500/4){
-    buzzer_set_period(1234);
-    
-  } else if(sec_cnt >= 10250/4 - 4750/4){
-    buzzer_set_period(1100);
-    
-  } else if(sec_cnt >= 10250/4 - 6000/4){
-    buzzer_set_period(925);
-    
-  } else if(sec_cnt >= 10250/4 - 4750/4){
-    buzzer_set_period(1100);
-    
-  } else if(sec_cnt >= 10250/4 - 6750/4){
-    buzzer_set_period(824);
-    
-  } else if(sec_cnt >= 10250/4 - 7000/4){
-    buzzer_set_period(980);
-    
-  } else if(sec_cnt >= 10250/4 - 7500/4){
-    buzzer_set_period(873);
-    
-  } else if(sec_cnt >= 10250/4 - 8500/4){
-    buzzer_set_period(777);
-    
-  } else if(sec_cnt >= 10250/4 - 9000/4){
-    buzzer_set_period(873);
-    
-  } else if(sec_cnt >= 10250/4 - 10250/4){
-    buzzer_set_period(617);
- 
-  } else {
-    buzzer_set_period(0);
-    
-  } 
-            
-            
-            
+    buzzer_set_period(harry_potter_notes[i]);
+    i++;
+  }
 }
+
+            
+            
+            
