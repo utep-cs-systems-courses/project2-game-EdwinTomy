@@ -7,5 +7,11 @@
 
 void led_init();
 void led_off();
+void dimLights();
+
+void dim25(int state);
+void dim50(int state);
+void dim75(int state);
+void dim100();
 
 #endif // included
