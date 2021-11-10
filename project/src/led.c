@@ -15,7 +15,6 @@ void led_off()
   P2OUT &= ~LED_RED;
 }
 
-int blink_count = 0;
 int dim_state = 1;
 int curr_state = 0;
 
