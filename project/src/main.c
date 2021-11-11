@@ -114,6 +114,9 @@ void play_harry_potter(){
       i = 0;
     }
     
+    P1OUT ^= LED_GREEN;
+    P1OUT ^= LED_RED;
+    
     buzzer_set_period(harry_potter_notes[i]);
   }
   song_count++;
