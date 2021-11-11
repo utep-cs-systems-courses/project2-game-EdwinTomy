@@ -5,10 +5,10 @@
 #include "switches.h"
 #include "buzzer.h"
 
-oddPress1 = 0;
-oddPress2 = 0;
-oddPress3 = 0;
-oddPress4 = 0;
+int oddPress1 = 0;
+int oddPress2 = 0;
+int oddPress3 = 0;
+int oddPress4 = 0;
 
 int main(void) {
   led_init();
@@ -122,12 +122,6 @@ void play_harry_potter(){
     i++;
   }
 }
-
-// To keep track of the number of times a button has been pressed
-oddPress1 = 0;
-oddPress2 = 0;
-oddPress3 = 0;
-oddPress4 = 0;
 
 // Interrupt Handler
 void 
