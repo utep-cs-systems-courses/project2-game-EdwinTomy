@@ -1,14 +1,8 @@
-//Alternate LEDs from Off, Green, and Red
 #include <msp430.h>
 #include "libTimer.h"
 #include "led.h"
 #include "switches.h"
 #include "buzzer.h"
-
-int oddPress1 = 0;
-int oddPress2 = 0;
-int oddPress3 = 0;
-int oddPress4 = 0;
 
 int main(void) {
   led_init();
@@ -68,7 +62,6 @@ void dim25(int state){
   default:
     break;
   }
-  
 }
 
 void dim50(int state){
@@ -84,6 +77,7 @@ void dim50(int state){
     break;
   }
 }
+
 void dim75(int state){
   switch(state){
   case 0:
@@ -98,22 +92,21 @@ void dim75(int state){
     break;
   }
 }
-
 void dim100(){
   P1OUT |= LED_GREEN;
 }
 
 // Buzz singing 
 int i = 0;
-int second_count = 0;
+int secondCount = 0;
 
 int harry_potter_notes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
 int harry_potter_times[14] = {250, 375, 125, 250, 500, 250, 625, 625, 375, 125, 250, 500, 250, 625};
 
 void play_harry_potter(){
-  if(second_count >= harry_potter_times[i]){
-    
-    second_count = 0;
+  if(secondCount >= harry_potter_times[i]){
+
+    secondCount = 0;
     if(i >= 14){
       i = 0;
     }
@@ -126,20 +119,17 @@ void play_harry_potter(){
 // Interrupt Handler
 void 
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
+  secondCount++;
+  if(sw1_down == 1){ //if sw1 pressed
+    play_harry_potter();
 
-  static int count = 0;
-  count++;
-  
-  if((count % 63) == 0 && oddPress1 == 1){ //if sw1 pressed
+  } else if(sw2_down == 1){ //if sw2 pressed
     play_harry_potter();
-    
-  } else if((count % 31) == 0 && oddPress2 == 1){ //if sw2 pressed
-    play_harry_potter();
-    
-  } else if((count % 63) == 0 && oddPress3 == 1){  
+
+  } else if(sw3_down == 1){  
     dim_lights();
-    
-  } else if((count % 125) == 0 && oddPress4 == 1){
+
+  } else if(sw4_down == 1){
     buzzer_off();
     led_off();
     buzzer_set_period(0);
@@ -150,4 +140,3 @@ __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
     buzzer_set_period(0);
   }
 }
-
