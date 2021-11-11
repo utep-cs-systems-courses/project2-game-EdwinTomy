@@ -3,6 +3,7 @@
 #include "led.h"
 #include "switches.h"
 #include "buzzer.h"
+#include <stdio.h>
 
 int main(void) {
   led_init();
