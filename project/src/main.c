@@ -17,20 +17,21 @@ int main(void) {
 int blink_count = 0;
 
 // LED dimming
+int dim_count = 0;
 int dim_state = 1;
 int curr_state = 0;
 int main_state = 0;
 
 void dim_lights(){
-  blink_count++;
+  dim_count++;
   
-  if(blink_count >= 500){
-    dim_state = (dim_state + 1) % 5;
-    blink_count = 0;
+  if(dim_count % 250 == 0){
+    main_state ^= 1; 
   }
   
-  if(blink_count % 250 == 0){
-    main_state ^= 1; 
+  if(dim_count >= 500){
+    dim_state = (dim_state + 1) % 5;
+    dim_count = 0;
   }
   
   if(main_state == 0){
@@ -98,28 +99,29 @@ void dim100(){
 
 // Buzz singing 
 int i = 0;
-int secondCount = 0;
+int song_count = 0;
 
 int harry_potter_notes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
 int harry_potter_times[14] = {250, 375, 125, 250, 500, 250, 625, 625, 375, 125, 250, 500, 250, 625};
 
 void play_harry_potter(){
-  if(secondCount >= harry_potter_times[i]){
+  if(song_count >= harry_potter_times[i]){
 
-    secondCount = 0;
+    song_count = 0;
+    i++;
     if(i >= 14){
       i = 0;
     }
     
     buzzer_set_period(harry_potter_notes[i]);
-    i++;
   }
+  song_count++;
 }
 
 // Interrupt Handler
 void 
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
-  secondCount++;
+  blink_count++;
   if(sw1_down == 1){ //if sw1 pressed
     play_harry_potter();
 
