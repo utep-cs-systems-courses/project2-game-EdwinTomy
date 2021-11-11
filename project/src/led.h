@@ -14,4 +14,6 @@ void dim50(int state);
 void dim75(int state);
 void dim100();
 
+void switching();
+
 #endif // included
