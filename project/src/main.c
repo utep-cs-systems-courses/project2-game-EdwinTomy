@@ -5,6 +5,11 @@
 #include "switches.h"
 #include "buzzer.h"
 
+oddPress1 = 0;
+oddPress2 = 0;
+oddPress3 = 0;
+oddPress4 = 0;
+
 int main(void) {
   led_init();
   switch_init();
