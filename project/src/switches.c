@@ -4,10 +4,10 @@
 #include "buzzer.h"
 #include "led.h"
 
-char sw1_down;
-char sw2_down;
-char sw3_down;
-char sw4_down;
+sw1Down = 0;
+sw2Down = 0;
+sw3Down = 0;
+sw4Down = 0;
 
 static char
 switch_update_interrupt_sense()
@@ -42,20 +42,34 @@ switch_interrupt_handler()
 {
   char p2val = switch_update_interrupt_sense();
   
-  if((p2val & SWITCHES) == 14){ //toggle sw1 on or off
-    turnOff();
-    sw1_down ^= 1;
-  } else if((p2val & SWITCHES) == 13){ //toggle sw2 on or off
-    turnOff();
-    sw2_down ^= 1;
-  } else if((p2val & SWITCHES) == 11){
-    turnOff();
-    sw3_down ^= 1;
-  } else if((p2val & SWITCHES) == 7){
-    turnOff();
-    sw4_down ^= 1;
-  } else {
-    buzzer_set_period(0); //if no switches are active
+  int prev1 = sw1Down;
+  int prev2 = sw2Down;
+  int prev3 = sw3Down;
+  int prev4 = sw4Down;
+
+  // Checks if button has been pressed
+  sw1Down = (p2val & SW1) ? 0 : 1;
+  sw2Down = (p2val & SW2) ? 0 : 1;
+  sw3Down = (p2val & SW3) ? 0 : 1;
+  sw4Down = (p2val & SW4) ? 0 : 1;
+
+  // Press button once to turn off, press again to turn off
+  if (prev1 != sw1Down && sw1Down){
+    oddPress1 ^= 1;
+    // One button pressed, all other should be off
+    oddPress2 = 0, oddPress3 = 0, oddPress4 = 0;
+  }
+  else if (prev2 != sw2Down && sw2Down){
+    oddPress2 ^= 1;
+    oddPress1 = 0, oddPress3 = 0, oddPress4 = 0;
+  }
+  else if (prev3 != sw3Down && sw3Down){
+    oddPress3 ^= 1;
+    oddPress1 = 0, oddPress2 = 0, oddPress4 = 0;
+  }
+  else if (prev4 != sw4Down && sw4Down){
+    oddPress4 ^= 1;
+    oddPress1 = 0, oddPress2 = 0, oddPress3 = 0;
   }
 }
 
