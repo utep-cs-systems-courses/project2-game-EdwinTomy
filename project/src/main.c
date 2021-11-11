@@ -100,15 +100,15 @@ void dim100(){
 
 // Buzz singing 
 int i = 0;
-int secondCount = 0;
+int second_count = 0;
 
 int harry_potter_notes[14] = {617, 824, 980, 873, 824, 1234, 1100, 925, 824, 980, 873, 777, 873, 617};
 int harry_potter_times[14] = {250, 375, 125, 250, 500, 250, 625, 625, 375, 125, 250, 500, 250, 625};
 
 void play_harry_potter(){
-  if(secondCount >= harry_potter_times[i]){
+  if(second_count >= harry_potter_times[i]){
     
-    secondCount = 0;
+    second_count = 0;
     if(i >= 14){
       i = 0;
     }
@@ -118,21 +118,29 @@ void play_harry_potter(){
   }
 }
 
+// To keep track of the number of times a button has been pressed
+oddPress1 = 0;
+oddPress2 = 0;
+oddPress3 = 0;
+oddPress4 = 0;
 
 // Interrupt Handler
 void 
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
-  secondCount++;
-  if(sw1_down == 1){ //if sw1 pressed
+
+  static int count = 0;
+  count++;
+  
+  if((count % 63) == 0 && oddPress1 == 1){ //if sw1 pressed
     play_harry_potter();
     
-  } else if(sw2_down == 1){ //if sw2 pressed
+  } else if((count % 31) == 0 && oddPress2 == 1){ //if sw2 pressed
     play_harry_potter();
     
-  } else if(sw3_down == 1){  
+  } else if((count % 63) == 0 && oddPress3 == 1){  
     dim_lights();
     
-  } else if(sw4_down == 1){
+  } else if((count % 125) == 0 && oddPress4 == 1){
     buzzer_off();
     led_off();
     buzzer_set_period(0);
