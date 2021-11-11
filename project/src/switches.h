@@ -10,7 +10,7 @@
 void switch_init();
 void switch_interrupt_handler();
 
-extern char sw1_down, sw2_down, sw3_down, sw4_down;
-extern int blink_count;
+extern int sw1Down, sw2Down, sw3Down, sw4Down;
+extern int oddPress1, oddPress2, oddPress3, oddPress4;
 
 #endif
