@@ -30,13 +30,6 @@ switch_init()/* setup switch */
   switch_update_interrupt_sense();
 }
 
-void turnOff(){
-  sw1_down &= ~sw1_down;
-  sw2_down &= ~sw2_down;
-  sw3_down &= ~sw3_down;
-  sw4_down &= ~sw4_down;
-}
-
 void
 switch_interrupt_handler()
 {
