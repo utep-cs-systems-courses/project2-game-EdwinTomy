@@ -127,11 +127,10 @@ void
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
   blink_count++;
   if(sw1_down == 1){ //if sw1 pressed
-    printf("hello");
     play_harry_potter();
 
   } else if(sw2_down == 1){ //if sw2 pressed
-     dim_lights();
+    dim_lights();
     buzzer_set_period(0);
 
   } else if(sw3_down == 1){  
