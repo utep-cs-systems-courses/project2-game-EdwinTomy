@@ -10,7 +10,7 @@ AS              = msp430-elf-as
 all: main.elf
 
 #additional rules for files
-main.elf: ${COMMON_OBJECTS} buzzer.o led.o switches.o main.o switching-s.o ../lib/libTimer.a
+main.elf: ${COMMON_OBJECTS} buzzer.o led.o switches.o main.o switching_s.o ../lib/libTimer.a
 	${CC} ${CFLAGS} -o $@ $^
 
 load: main.elf
@@ -23,5 +23,5 @@ buzzer.o: buzzer.h
 led.o: led.h 
 switches.o: switches.h led.h 
 
-switching-c.o: led.h
-switching-s.o: led.h
+switching_c.o: led.h
+switching_s.o: led.h
