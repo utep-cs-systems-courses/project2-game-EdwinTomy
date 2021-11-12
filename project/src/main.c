@@ -3,8 +3,6 @@
 #include "led.h"
 #include "switches.h"
 #include "buzzer.h"
-#include <stdio.h>
-
 int main(void) {
   led_init();
   switch_init();
@@ -14,7 +12,6 @@ int main(void) {
   
   or_sr(0x18);		/* CPU off, GIE on */
 }
-
 int blink_count = 0;
 
 // LED dimming
@@ -25,16 +22,16 @@ int main_state = 0;
 
 void dim_lights(){
   dim_count++;
-  
+
   if(dim_count % 250 == 0){
     main_state ^= 1; 
   }
-  
+
   if(dim_count >= 500){
     dim_state = (dim_state + 1) % 5;
     dim_count = 0;
   }
-  
+
   if(main_state == 0){
     P1OUT &= ~LED_GREEN;
     return;
@@ -50,7 +47,6 @@ void dim_lights(){
     default: break;
   }
 }
-
 void dim25(int state){
   switch(state){
   case 0:
@@ -65,7 +61,6 @@ void dim25(int state){
     break;
   }
 }
-
 void dim50(int state){
   switch(state){
   case 0:
@@ -79,7 +74,6 @@ void dim50(int state){
     break;
   }
 }
-
 void dim75(int state){
   switch(state){
   case 0:
@@ -113,10 +107,7 @@ void play_harry_potter(){
     if(i >= 14){
       i = 0;
     }
-    
-    P1OUT ^= LED_GREEN;
-    P1OUT ^= LED_RED;
-    
+
     buzzer_set_period(harry_potter_notes[i]);
   }
   song_count++;
@@ -130,16 +121,17 @@ __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
     play_harry_potter();
 
   } else if(sw2_down == 1){ //if sw2 pressed
-    dim_lights();
-    buzzer_set_period(0);
-
+    play_harry_potter();
   } else if(sw3_down == 1){  
-    switching();
-    buzzer_set_period(0);
-
+    dim_lights();
   } else if(sw4_down == 1){
     buzzer_off();
     led_off();
     buzzer_set_period(0);
-  } 
+    
+  } else {
+    buzzer_off();
+    led_off();
+    buzzer_set_period(0);
+  }
 }
