@@ -118,10 +118,10 @@ void
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
   blink_count++;
   if(sw1_down == 1){ //if sw1 pressed
-    play_harry_potter();
+    switching();
 
   } else if(sw2_down == 1){ //if sw2 pressed
-    //switching();
+    play_harry_potter();
     
   } else if(sw3_down == 1){  
     dim_lights();
