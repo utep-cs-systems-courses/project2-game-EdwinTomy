@@ -121,7 +121,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
     play_harry_potter();
 
   } else if(sw2_down == 1){ //if sw2 pressed
-    switching();
+    //switching();
     
   } else if(sw3_down == 1){  
     dim_lights();
