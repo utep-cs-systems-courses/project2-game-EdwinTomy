@@ -130,5 +130,10 @@ __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
     buzzer_off();
     led_off();
     buzzer_set_period(0);
+    
+  } else{
+    buzzer_off();
+    led_off();
+    buzzer_set_period(0);
   } 
 }
