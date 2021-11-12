@@ -5,11 +5,11 @@ extern int blink_count;
 
 void switching(){
   
-  if(secondCount <= 125){
+  if(blink_count <= 125){
     P1OUT ^= LED_GREEN;
   }
   
-  if(secondCount <= 62){
+  if(blink_count <= 62){
     P1OUT ^= LED_RED;
   }
   
