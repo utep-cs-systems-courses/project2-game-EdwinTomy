@@ -14,11 +14,11 @@ switching:
 	
 less:
 	xor #red_turn, &P1OUT
-  jmp out
+  	jmp out
   
 more:
 	xor #green_turn, &P1OUT
-  jmp out
+  	jmp out
   
 out:
 	pop r0
