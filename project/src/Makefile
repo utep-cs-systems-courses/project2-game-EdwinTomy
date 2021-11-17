@@ -23,5 +23,4 @@ buzzer.o: buzzer.h
 led.o: led.h 
 switches.o: switches.h led.h 
 
-switching_c.o: led.h
 switching_s.o: led.h
