@@ -21,6 +21,7 @@ int curr_state = 0;
 int main_state = 0;
 
 void dim_lights(){
+  P1OUT &= ~LED_RED; //turn off red led
   dim_count++;
 
   if(dim_count % 250 == 0){
@@ -51,10 +52,10 @@ void dim25(int state){
   case 0:
   case 1:
   case 2:
-    P1OUT &= ~LED_GREEN; //turn off led_green
+    P1OUT &= ~LED_GREEN; //turn off green led
     break;
   case 3:
-    P1OUT |= LED_GREEN; //turn on led_green
+    P1OUT |= LED_GREEN; //turn on green led
     break;
   default:
     break;
@@ -81,7 +82,7 @@ void dim75(int state){
   case 1:
   case 2:
   case 3:
-    P1OUT |= LED_GREEN; //turn on led_green
+    P1OUT |= LED_GREEN; //turn on green led
     break;
   default:
     break;
@@ -116,14 +117,17 @@ void play_harry_potter(){
 void 
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
   if(sw1_down == 1){ //if sw1 pressed
+    buzzer_set_period(0);
     blink_count++;
     blink_count %= 125;
     switching();
 
   } else if(sw2_down == 1){ //if sw2 pressed
+    led_off();
     play_harry_potter();
     
   } else if(sw3_down == 1){  
+    buzzer_set_period(0);
     dim_lights();
     
   } else if(sw4_down == 1){
