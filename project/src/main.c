@@ -115,8 +115,9 @@ void play_harry_potter(){
 // Interrupt Handler
 void 
 __interrupt_vec(WDT_VECTOR) WDT(){      /* 250 interrupts/sec */
-  blink_count++;
   if(sw1_down == 1){ //if sw1 pressed
+    blink_count++;
+    blink_count %= 125;
     switching();
 
   } else if(sw2_down == 1){ //if sw2 pressed
