@@ -2,9 +2,6 @@
 	.p2align 1,0
 
 	.extern blink_count
-	.extern green_turn
-	.extern red_turn
-  
 
 switching:
 
@@ -13,11 +10,11 @@ switching:
 	jmp more
 	
 less:
-	xor #red_turn, &P1OUT
+	xor #1, &P1OUT
   	jmp out
   
 more:
-	xor #green_turn, &P1OUT
+	xor #64, &P1OUT
   	jmp out
   
 out:

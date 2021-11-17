@@ -32,10 +32,9 @@ void dim_lights(){
     dim_count = 0;
   }
 
-  if(main_state == 0){
-    P1OUT &= ~LED_GREEN;
-    return;
-  }
+  //if(main_state == 0){
+  //P1OUT &= ~LED_GREEN;
+  //return;
   
   curr_state = (curr_state + 1) % 4;
   switch(dim_state){
